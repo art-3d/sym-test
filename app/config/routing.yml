@@ -1,0 +1,4 @@
+art_test:
+    resource: "@ArtTestBundle/Resources/config/routing.yml"
+    prefix:   /
+
