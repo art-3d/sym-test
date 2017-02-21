@@ -1,3 +1,7 @@
 guestbook:
     path:     /
     defaults: { _controller: ArtTestBundle:Default:guestBook }
+
+fos_user_registration_register:
+  path: /register
+  defaults: { _controller: ArtTestBundle:Default:register }

@@ -7,8 +7,8 @@
 
 {% for guestBook in guestbooks %}
     <div>
-        <p>User name: {{ guestBook.userName }}</p>
-        <p>User email: {{ guestBook.userEmail }}</p>
+        {% if guestBook.userName is not empty %}<p>User name: {{ guestBook.userName }}</p>{% endif %}
+        {% if guestBook.userEmail is not empty %}<p>User email: {{ guestBook.userEmail }}</p>{% endif %}
         <p>Message: {{ guestBook.message }}</p>
         <p>Created: {{ guestBook.createdAt|date("m.d.Y") }}</p>
     </div>

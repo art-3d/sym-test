@@ -35,4 +35,28 @@ class DefaultController extends Controller
             'guestbooks' => $guestbooks
         ]);
     }
+
+    public function registerAction()
+    {
+        $form = $this->container->get('fos_user.registration.form');
+        $formHandler = $this->container->get('fos_user.registration.form.handler');
+        $confirmationEnabled = $this->container->getParameter('fos_user.registration.confirmation.enabled');
+
+        $process = $formHandler->process($confirmationEnabled);
+        if ($process) {
+            $user = $form->getData();
+
+            $guestBook = new GuestBook();
+            $guestBook->setMessage("Greeting new user " . $user->getUsername());
+            $em = $this->getDoctrine()->getEntityManager();
+            $em->persist($guestBook);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('guestbook'));
+        }
+
+        return $this->container->get('templating')->renderResponse('FOSUserBundle:Registration:register.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
 }
