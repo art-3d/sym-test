@@ -1,0 +1,28 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <header>
+        <h1>Guest Book</h1>
+    </header>
+
+{% for guestBook in guestbooks %}
+    <div>
+        <p>User name: {{ guestBook.userName }}</p>
+        <p>User email: {{ guestBook.userEmail }}</p>
+        <p>Message: {{ guestBook.message }}</p>
+        <p>Created: {{ guestBook.createdAt|date("m.d.Y") }}</p>
+    </div>
+{% endfor %}
+
+{{ form_start(form, { 'action': path('guestbook'), 'method': 'POST' }) }}
+{{ form_errors(form) }}
+
+{{ form_row(form.user_name) }}
+{{ form_row(form.user_email) }}
+{{ form_row(form.message) }}
+
+{{ form_rest(form) }}
+
+<input type="submit" value="Submit" />
+
+{% endblock %}
